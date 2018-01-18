@@ -100,7 +100,7 @@ $(document).ready(function(){
 
         }
 
-        xhr.send("email="+emailVal+"&{csrf_name:"+csrfName+",csrf_value:"+csrfValue+"}");
+        xhr.send("email="+emailVal+"&csrf_name="+csrfName+"&csrf_value="+csrfValue);
 
     }
 
