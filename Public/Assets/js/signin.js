@@ -45,7 +45,7 @@ $(document).ready(function(){
 
         if(resultObject.result == "true"){
 
-            runSigninUser();
+            runSigninUser(resultObject.email);
         }else{
 
             signinalert.addClass("alert-danger");
@@ -74,6 +74,31 @@ $(document).ready(function(){
             checkValidity(emailaddr);
 
         }
+
+    }
+
+    function runSigninUser(emailVal){
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost/dealsmanager/signinuser", true);
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+        xhr.error = function(){
+
+            console.log("error");
+        }
+
+        xhr.onload = function(){
+
+            if(this.status == 200){
+
+                console.log(JSON.parse(this.responseText));
+
+            }
+
+        }
+
+        xhr.send("email="+emailVal);
 
     }
 
