@@ -1,19 +1,18 @@
 <?php
 /**
  * @uses run dependancy injection container
+ * @return db abstraction object api
  */
 
- $container = $app->getContainer();
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container['settings']['db']);
 
- //add csrf to the container
- $container['csrf'] = function($container){
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
 
-    return new \Slim\Csrf\Guard;
- };
+    $container['db'] = function($container) use($capsule){
 
- $app->add(new DealsManager\Middlewares\CsrfMiddleware($container));
- $app->add($container->csrf);
-
-
+        return $capsule;
+    }
 
 ?>

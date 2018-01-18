@@ -19,6 +19,8 @@
         
     }
 
+    
+    session_start();
     $app = new Slim\App([
 
         "settings"=>[
@@ -30,7 +32,8 @@
                 "port"=>getenv("DB_PORT"),
                 "charset"=>getenv("DB_CHARSET"),
                 "password"=>getenv("DB_PASSWORD"),
-                "driver"=>getenv("DB_DRIVER")
+                "driver"=>getenv("DB_DRIVER"),
+                "collation"=>getenv("DB_COLLATION")
             ]
         ]
 

@@ -11,6 +11,8 @@
 
      $app->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
+     $app->post("/signinuser", AuthController::class.":signInUser");
+
 
 
 ?>

@@ -29,6 +29,13 @@
 
         }
 
+        //start the run user methods
+        public function signInUser($request, $response){
+
+            return "dkdjasasodj";
+
+        }
+
     }
 
 
