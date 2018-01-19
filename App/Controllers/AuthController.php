@@ -32,7 +32,8 @@
         //start the run user methods
         public function signInUser($request, $response){
 
-            return "dkdjasasodj";
+            $email = $request->getParsedBodyParam("email");
+            return $email;
 
         }
 
