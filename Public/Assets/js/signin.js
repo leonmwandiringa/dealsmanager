@@ -11,7 +11,7 @@ $(document).ready(function(){
     $("#signinbtn").click(signInUser);
 
     //check validity ...- 2nd to be executed
-    function checkValidity(emailaddr){
+    function checkValidity(emailaddr, csrfName, csrfValue){
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "http://localhost/dealsmanager/checkemailvalidity", true);
@@ -28,27 +28,26 @@ $(document).ready(function(){
 
                 resultVal =  JSON.parse(this.responseText);
 
-                    runResultDisplay(resultVal);
-
+                    runResultDisplay(resultVal, csrfName, csrfValue);
 
             }
 
         }
 
-        xhr.send("email="+emailaddr);
+        xhr.send("email="+emailaddr+"&csrf_name="+csrfName+"&csrf_value="+csrfValue);
 
     }
 
     //execute results and run the sign in endpoint .. - 3rd to be executed
-    function runResultDisplay(resultVal){
+    function runResultDisplay(resultVal, csrfName, csrfValue){
 
        let resultObject = resultVal;
 
         if(resultObject.result == "true"){
 
-            //runSigninUser(resultObject.email);
-            //console.log("dsadsa");
-        //}else{
+            runSigninUser(resultObject.email, csrfName, csrfValue);
+            
+        }else{
 
             signinalert.addClass("alert-danger");
             signinalert.find("#alertnotice").text("Error ");
@@ -75,13 +74,13 @@ $(document).ready(function(){
             
         }else{
 
-            checkValidity(emailaddr);
+            checkValidity(emailaddr, csrfName, csrfValue);
 
         }
 
     }
 
-    function runSigninUser(emailVal){
+    function runSigninUser(emailVal, csrfName, csrfValue){
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "http://localhost/dealsmanager/signinuser", true);
@@ -102,7 +101,7 @@ $(document).ready(function(){
 
         }
 
-        xhr.send("email="+emailVal);
+        xhr.send("email="+emailVal+"&csrf_name="+csrfName+"&csrf_value="+csrfValue);
 
     }
 

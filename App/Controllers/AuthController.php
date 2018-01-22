@@ -6,6 +6,9 @@
 
     namespace DealsManager\Controllers;
     use DealsManager\Controllers\Controller;
+    use DealsManager\Controllers\EmailController;
+
+    require __DIR__."/../../vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php";
 
     class AuthController extends Controller{
 
@@ -32,8 +35,11 @@
         //start the run user methods
         public function signInUser($request, $response){
 
-            $email = $request->getParsedBodyParam("email");
-            return $email;
+            $message = $this->mailinst('Wonderful Subject')->setFrom(['john@doe.com' => 'John Doe'])
+            ->setTo(['tinashe.leon@yahoo.com', 'tinashe.leon@yahoo.com' => 'A name'])
+            ->setBody('Here is the message itself');
+
+            $this->mail($message);
 
         }
 

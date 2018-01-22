@@ -5,7 +5,8 @@
         "slim/twig-view": "^2.3",
         "slim/csrf": "^0.8.2",
         "robmorgan/phinx": "^0.9.2",
-        "illuminate/database": "^5.4"
+        "illuminate/database": "^5.4",
+        "swiftmailer/swiftmailer": "^5.4"
     },
     "autoload":{
      
