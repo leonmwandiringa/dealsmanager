@@ -17,7 +17,8 @@
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->string('email');
-                $table->longText('tokenvalue');
+                $table->string('password', 250);
+                $table->longText('tokenvalue', 250);
                 $table->string('tokendate');
                 $table->timestamps();
 
