@@ -27,6 +27,10 @@
 
     };
 
+    $container['flash'] = function () {
+        return new \Slim\Flash\Messages();
+    };
+    
     //add csrf to the container
     // $container['csrf'] = function($container){
    

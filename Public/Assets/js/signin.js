@@ -95,7 +95,10 @@ $(document).ready(function(){
 
             if(this.status == 200){
 
-                console.log(this.responseText);
+                if(this.responseText == "true"){
+                 
+                    swal("Great stuff!", "an email has been sent to your email address, use the link and password gived to log in !", "success");
+                }
 
             }
 

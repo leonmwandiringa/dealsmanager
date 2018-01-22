@@ -17,6 +17,8 @@
 
      $app->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
+     $app->get("/login/{email}/{token}", AuthController::class.":login");
+
      //$app->post("/signinuser", AuthController::class.":signInUser");
 
      $app->post("/signinuser", function($request, $response){
@@ -55,7 +57,7 @@
         $this->mail->send($message);
 
         return "true";
-     });
+     })->setName('signin');
 
      
 

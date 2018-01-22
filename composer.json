@@ -7,7 +7,8 @@
         "robmorgan/phinx": "^0.9.2",
         "illuminate/database": "^5.4",
         "swiftmailer/swiftmailer": "^5.4",
-        "nesbot/carbon": "^1.22"
+        "nesbot/carbon": "^1.22",
+        "slim/flash": "^0.4.0"
     },
     "autoload":{
      
