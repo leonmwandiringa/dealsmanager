@@ -23,16 +23,9 @@
                         ->setUsername('47a02e8986f2dc42976fdba43ccb2fbd')
                         ->setPassword('25e513cd363eb4eae15c67b7bdc36a42');
                         
-            $mailer = Swift_Mailer::newInstance($transport);
-            
-            return $mailer;
+            return Swift_Mailer::newInstance($transport);
 
     };
-
-    $container['mailinst'] = function($container){
-
-        return new Swift_Message();
-    }
 
     //add csrf to the container
     // $container['csrf'] = function($container){
