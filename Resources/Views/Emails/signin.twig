@@ -260,8 +260,10 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                        <p>Hi there, {{$name}}</p>
+                        <p>finish up your sign in by clicking the link and entering the one time password below to login</p>
+                        <h2> One Time Password</h2>
+                        <h3>{{$password}}</h3>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -269,7 +271,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
+                                      <td> <a href="http://htmlemail.io" target="_blank">Sign In</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
