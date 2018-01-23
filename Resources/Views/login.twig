@@ -23,9 +23,11 @@
             <span class="input-group-addon"><i class="fa fa-eye-slash"></i></span>
             <input type="password" name="passsword" class="form-control" placeholder="your password" id="password">
         </div>
-        
+
     </div>
-    
+    <input type="hidden" name="emailaddr" id="hdemailaddr" value="{{ email }}">
+    <input type="hidden" name="tokenaddr" id="hdtokenaddr" value="{{ token }}">
+
     <button type="button" class="btn btn-default btn-lg" name="login" id="loginbtn">Log In In</button>
     {{ csrf.field | raw }}
 </form>
