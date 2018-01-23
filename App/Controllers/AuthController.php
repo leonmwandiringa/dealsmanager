@@ -91,7 +91,7 @@
 
                 }else{
                     
-                    if($this->setupUserNow($email, $token)){
+                    if($this->setupUserNow($email, $token, $userIn->id)){
                         $this->flash->addMessage('success','Great stuff you\'re In');
                         $response->withRedirect($this->router->pathFor('home'));
                     }
@@ -118,8 +118,11 @@
             return false;
         }
 
-        public function setupUserNow(){
+        public function setupUserNow($email, $passwoord, $id){
 
+            $cookieval = '';
+            
+            setCookie('umid', $cookieval, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
 
         }
 
