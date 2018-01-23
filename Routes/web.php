@@ -13,11 +13,13 @@
     //  ->setUsername('47a02e8986f2dc42976fdba43ccb2fbd')
     //  ->setPassword('25e513cd363eb4eae15c67b7bdc36a42'));
     
-     $app->get("/", HomeController::class.":index");
+     $app->get("/", HomeController::class.":index")->setName('signin');
 
      $app->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
      $app->get("/login/{email}/{token}", AuthController::class.":login");
+
+     $app->post("/login", AuthController::class.":postLogin");
 
      //$app->post("/signinuser", AuthController::class.":signInUser");
 
@@ -57,7 +59,7 @@
         $this->mail->send($message);
 
         return "true";
-     })->setName('signin');
+     });
 
      
 

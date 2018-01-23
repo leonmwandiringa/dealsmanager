@@ -41,20 +41,38 @@
             $token = $args['token'];
 
             $user = User::where('email', $email)->get()->take(1)->first();
-            $now = Carbon::now();
-            $tokendate = new Carbon($user->tokendate);
 
             //as long as token is not old
-           if($tokendate->diffInHours($now) < 25){
+            if(User::where('email', $email)->get()->take(1)->count()){
+
+                $now = Carbon::now();
+                $tokendate = new Carbon($user->tokendate);
+
+                if($tokendate->diffInHours($now) < 25){
                
-            return $ths->view->render($response, 'login', ['email'=>$email, 'token'=>$token]);
+                    return $this->view->render($response, 'login.twig', ['email'=>$email, 'token'=>$token]);
+    
+               }else{
 
-           }else{
+                    $this->flash->addMessage('error', 'Sorry Your Token has expired Please sign in again');
+                   return $response->withRedirect($this->router->pathFor('signin'));
+    
+               }
 
-                $response->withRedirect($this->router->pathFor('signin'));
-           }
+            }else{
+
+                $this->flash->addMessage('error', 'Your email Address and Key was not found');
+                return $response->withRedirect($this->router->pathFor('signin'));
+
+            }
 
             //var_dump(Carbon::parse($user->tokendate));
+        }
+
+        public function postLogin($request, $response){
+
+            $email = $request->getParsedBodyParam('email');
+            $password = $request->getParsedBodyParam('password');
         }
 
     }

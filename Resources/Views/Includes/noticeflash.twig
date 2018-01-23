@@ -1,0 +1,17 @@
+{% if flash.getMessage('error') %}
+
+    <div class="alert alert-dismissible alert-danger">
+        <a href="javascript:void(0)" data-dismiss="alert" class="close"> &times; </a>
+        <p><strong>Error</strong> {{ flash.getMessage('error') | first }}<p>
+    </div>
+
+{% endif %}
+
+{% if flash.getMessage('success') %}
+
+    <div class="alert alert-dismissible alert-danger">
+        <a href="javascript:void(0)" data-dismiss="alert" class="close"> &times; </a>
+        <p><strong>Success</strong> {{ flash.getMessage('success') | first }}<p>
+    </div>
+
+{% endif %}

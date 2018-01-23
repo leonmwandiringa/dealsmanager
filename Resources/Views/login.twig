@@ -1,0 +1,33 @@
+{% extends "Templates/app.twig"%}
+
+{% block pagetitle %}Home{% endblock %}
+
+{% block content %}
+<div class="col-md-8 col-md-push-2 center-block">
+<form name="signin">
+    <div class="alert alert-dismissible" style="display: none;" id="signinalert">
+        <a href="javascript:void(0)" class="close" onclick="getElementById('signinalert').style.display='none'">&times;</a>
+        <p><strong id="alertnotice"></strong><span id="alertmessage"></span></p>
+    </div>
+    <div class="form-group">
+    <div class="input-group">
+    <span class="input-group-addon">
+        <i class="fa fa-envelope"></i>
+    </span>
+        <p class="form-control-static" style="border: 1px solid #cccccc; padding-left: 10px; border-radius: 0 5px 5px 0;">{{ email }}</p>
+    </div>
+    </div>
+    <div class="form-group">
+
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-eye-slash"></i></span>
+            <input type="password" name="passsword" class="form-control" placeholder="your password" id="password">
+        </div>
+        
+    </div>
+    
+    <button type="button" class="btn btn-default btn-lg" name="login" id="loginbtn">Log In In</button>
+    {{ csrf.field | raw }}
+</form>
+</div>
+{% endblock %}
