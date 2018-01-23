@@ -1,7 +1,7 @@
 $(document).ready(function(){
     "use strict";
     $("#loginbtn").click(loginUser);
-    var email, token;
+    var email, token, password;
     var alert = $("#signinalert");
 
     function loginUser(){
@@ -24,12 +24,13 @@ $(document).ready(function(){
                 }
 
             }
-            xhr.send("email="+email+"&token="+token);
+            xhr.send("email="+email+"&token="+token+"&password="+password);
         }else{
 
+            alert.addClass("alert-danger");
             alert.fadeIn(500);
-            alert.find("#alertnotice").text("Error");
-            alert.find("#alertmessage").text("Please fill in your Your OTP");
+            alert.find("#alertnotice").text("Error ! ");
+            alert.find("#alertmessage").text(" Please fill in your Your OTP");
 
         }
 

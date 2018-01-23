@@ -52,7 +52,7 @@ $(document).ready(function(){
             signinalert.addClass("alert-danger");
             signinalert.find("#alertnotice").text("Error ");
             signinalert.find("#alertmessage").text(" "+ resultObject.message);
-            signinalert.show(1000);
+            signinalert.fadeIn(500);
 
         }
 
@@ -70,7 +70,7 @@ $(document).ready(function(){
             signinalert.addClass("alert-danger");
             signinalert.find("#alertnotice").text("Error ");
             signinalert.find("#alertmessage").text(" Email Address Required");
-            signinalert.show(1000);
+            signinalert.fadeIn(500);
             
         }else{
 

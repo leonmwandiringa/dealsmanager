@@ -73,6 +73,54 @@
 
             $email = $request->getParsedBodyParam('email');
             $password = $request->getParsedBodyParam('password');
+            $token = $request->getParsedBodyParam('token');
+            $userIn = User::where('email', $email)->get()->take(1)->first();
+            $tokenldate = new Carbon($userIn->tokendate);
+
+            if(!$this->checkUser($email)){
+
+                $this->flash->addMessage("error", "Your email account was not found try signing in");
+                return $response->withRedirect($this->router->pathFor('signin'));
+            }
+
+            if($token == $userIn->tokenvalue && $tokenldate->diffInHours(Carbon::now()) < 25){
+
+                if(!password_verify($password, $userIn->password)){
+
+                    $message = ['notice'=>'error', 'message'=>'Password is not correct', 'result'=>'false'];
+
+                }else{
+                    
+                    if($this->setupUserNow($email, $token)){
+                        $this->flash->addMessage('success','Great stuff you\'re In');
+                        $response->withRedirect($this->router->pathFor('home'));
+                    }
+
+                }
+
+            }else{
+
+                $message = ['notice'=>'error', 'message'=>'Sorry its Either  Your Token has expired or cant be found', 'result'=>'false'];
+            }
+
+            return $response->withJson($message,200);
+            
+        }
+
+        public function checkUser($email){
+
+            $userAvail = User::where('email', $email)->get()->take(1)->count();
+
+            if($userAvail != 0){
+                return true;
+            }
+
+            return false;
+        }
+
+        public function setupUserNow(){
+
+
         }
 
     }
