@@ -16,7 +16,6 @@
     public function authenticate($id, $name, $email){
 
         $this->payload = array(
-
             "id"=>$id,
             "name"=>$name,
             "email"=>$email

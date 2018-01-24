@@ -1,7 +1,7 @@
 $(document).ready(function(){
     "use strict";
     $("#loginbtn").click(loginUser);
-    var email, token, password;
+    var email, token, password, accessHeader;
     var alert = $("#signinalert");
 
     function loginUser(){
@@ -19,7 +19,10 @@ $(document).ready(function(){
 
                 if(this.status == 200){
 
-                    console.log(this.responseText);
+                    accessHeader = this.getResponseHeader('X-Access-Token');
+                    //console.log(this.responseText);
+                    console.log(accessHeader);
+                    
 
                 }
 

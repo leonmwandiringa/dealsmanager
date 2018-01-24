@@ -93,10 +93,12 @@
                 }else{
                     
                     // if($this->setupUserNow($email, $token, $userIn->id)){
-                    //     $this->flash->addMessage('success','Great stuff you\'re In');
-                    //     $response->withRedirect($this->router->pathFor('home'));
-                    // }
-                    return var_dump($this->setupUserNow($email, $userIn->id, $userIn->name));
+                    //     
+                    if($this->setupUserNow($email, $userIn->id, $userIn->name, $request, $response)){
+
+                        
+                    }
+                    
                 }
 
             }else{
@@ -119,12 +121,14 @@
             return false;
         }
 
-        public function setupUserNow($email, $id, $name){
+        public function setupUserNow($email, $id, $name, $request, $response){
 
-            //$cookieval = '';
             $cookieValJWT = $this->JWTAUTH->authenticate($id, $name, $email);
-            return setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
-
+            setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
+            
+            //forwarding request
+            $this->flash->addMessage('success','Great stuff you\'re In');
+            return $response->withHeader('X-Access-Token', $cookieValJWT)->withRedirect($this->router->pathFor('home'));
         }
 
     }
