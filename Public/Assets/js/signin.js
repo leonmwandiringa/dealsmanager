@@ -45,6 +45,9 @@ $(document).ready(function(){
 
         if(resultObject.result == "true"){
 
+            $("body").addClass("bodything");
+            $("#loaderr").fadeIn(400);
+
             runSigninUser(resultObject.email, csrfName, csrfValue);
             
         }else{
@@ -79,7 +82,7 @@ $(document).ready(function(){
         }
 
     }
-
+    //last to be executed
     function runSigninUser(emailVal, csrfName, csrfValue){
 
         let xhr = new XMLHttpRequest();
@@ -96,7 +99,10 @@ $(document).ready(function(){
             if(this.status == 200){
 
                 if(this.responseText == "true"){
-                 
+
+                    $("body").removeClass("bodything");
+                    $("#loaderr").fadeOut(400);
+                    
                     swal("Great stuff!", "an email has been sent to your email address, use the link and password gived to log in !", "success");
                 }
 

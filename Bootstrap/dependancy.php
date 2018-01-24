@@ -32,6 +32,12 @@
     $container['flash'] = function () {
         return new \Slim\Flash\Messages();
     };
+
+    $container['JWTAUTH'] = function($container){
+
+        return new DealsManager\Controllers\JWTController($container);
+
+    };
     
     //add csrf to the container
     // $container['csrf'] = function($container){

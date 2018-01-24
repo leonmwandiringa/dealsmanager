@@ -36,6 +36,10 @@
                 "password"=>getenv("DB_PASSWORD"),
                 "driver"=>getenv("DB_DRIVER"),
                 "collation"=>getenv("DB_COLLATION")
+            ],
+            "jwt"=>[
+                
+                "secret"=>getenv("JWTSECRET")
             ]
         ]
 

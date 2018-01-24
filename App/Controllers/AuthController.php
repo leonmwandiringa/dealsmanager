@@ -7,6 +7,7 @@
     namespace DealsManager\Controllers;
     use DealsManager\Controllers\Controller;
     use DealsManager\Models\User;
+    use DealsManager\Controllers\JWTController;
     use Carbon\Carbon;
 
     require __DIR__."/../../vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php";
@@ -91,11 +92,11 @@
 
                 }else{
                     
-                    if($this->setupUserNow($email, $token, $userIn->id)){
-                        $this->flash->addMessage('success','Great stuff you\'re In');
-                        $response->withRedirect($this->router->pathFor('home'));
-                    }
-
+                    // if($this->setupUserNow($email, $token, $userIn->id)){
+                    //     $this->flash->addMessage('success','Great stuff you\'re In');
+                    //     $response->withRedirect($this->router->pathFor('home'));
+                    // }
+                    return var_dump($this->setupUserNow($email, $userIn->id, $userIn->name));
                 }
 
             }else{
@@ -118,11 +119,11 @@
             return false;
         }
 
-        public function setupUserNow($email, $passwoord, $id){
+        public function setupUserNow($email, $id, $name){
 
-            $cookieval = '';
-            
-            setCookie('umid', $cookieval, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
+            //$cookieval = '';
+            $cookieValJWT = $this->JWTAUTH->authenticate($id, $name, $email);
+            return setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
 
         }
 

@@ -8,7 +8,8 @@
         "illuminate/database": "^5.4",
         "swiftmailer/swiftmailer": "^5.4",
         "nesbot/carbon": "^1.22",
-        "slim/flash": "^0.4.0"
+        "slim/flash": "^0.4.0",
+        "firebase/php-jwt": "^5.0"
     },
     "autoload":{
      
