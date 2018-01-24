@@ -6,6 +6,7 @@
     //include controllers to be used
      use DealsManager\Controllers\HomeController;
      use DealsManager\Controllers\AuthController;
+     use DealsManager\Controllers\AuthViewController;
      use DealsManager\Models\User;
      use Carbon\Carbon;
 
@@ -14,6 +15,8 @@
     //  ->setPassword('25e513cd363eb4eae15c67b7bdc36a42'));
     
      $app->get("/", HomeController::class.":index")->setName('signin');
+
+     $app->get("/", AuthViewController::class.":index")->setName('home');
 
      $app->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
