@@ -71,13 +71,15 @@
         }
 
         public function postLogin($request, $response){
-
+            //fetch params
             $email = $request->getParsedBodyParam('email');
             $password = $request->getParsedBodyParam('password');
             $token = $request->getParsedBodyParam('token');
+
             $userIn = User::where('email', $email)->get()->take(1)->first();
             $tokenldate = new Carbon($userIn->tokendate);
 
+            //run the check method for user email check
             if(!$this->checkUser($email)){
 
                 $this->flash->addMessage("error", "Your email account was not found try signing in");
@@ -92,13 +94,9 @@
 
                 }else{
                     
-                    // if($this->setupUserNow($email, $token, $userIn->id)){
-                    //     
-                    if($this->setupUserNow($email, $userIn->id, $userIn->name, $request, $response)){
-
-                        
-                    }
-                    
+                    //return the cookie and token header for use
+                    return $this->setupUserNow($email, $userIn->id, $userIn->name, $request, $response);
+                  
                 }
 
             }else{
@@ -124,11 +122,12 @@
         public function setupUserNow($email, $id, $name, $request, $response){
 
             $cookieValJWT = $this->JWTAUTH->authenticate($id, $name, $email);
-            setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', isset($_SERVER['HTTPS']), TRUE);
+            setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', FALSE, TRUE);
             
             //forwarding request
             $this->flash->addMessage('success','Great stuff you\'re In');
-            return $response->withHeader('X-Access-Token', $cookieValJWT)->withRedirect($this->router->pathFor('home'));
+            return $response->withHeader('X-Access-Token', $cookieValJWT);
+
         }
 
     }

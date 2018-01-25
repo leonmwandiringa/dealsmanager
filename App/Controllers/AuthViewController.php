@@ -9,13 +9,12 @@
 
  class AuthViewController extends Controller{
 
-    public function index($request, $repsonse){
+    public function index($request, $response){
 
         return $this->view->render($response, 'userhome.twig');
 
     }
 
  }
-
 
 ?>
