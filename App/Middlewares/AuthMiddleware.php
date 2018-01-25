@@ -19,6 +19,7 @@ class AuthMiddleware extends Middleware{
         //check the existence of headers or cookie
         if(!isset($_COOKIE['umid']) || $request->getHeader('X-Access-Token') == ""){
 
+            $this->flash->addMessage('error','Your Token or cookie session was not found');
             return $response->withRedirect($this->router->pathFor('signin'));
         }
 
@@ -26,6 +27,14 @@ class AuthMiddleware extends Middleware{
         if(isset($_COOKIE['umid']) && $_COOKIE['umid'] != ""){
 
             $value = JWT::decode($_COOKIE['umid'], $this->container['settings']['jwt']['secret'], array('HS256'));
+
+            if(!User::where('email',$value->email)->get()->take(1)->first()){
+
+                $this->flash->addMessage('error','Your Token or cookie session link to user\'s account was not found');
+                return $response->withRedirect($this->router->pathFor('signin'));
+
+            }
+            
 
         }
         return $next($request, $response);

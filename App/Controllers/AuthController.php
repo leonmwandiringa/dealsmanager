@@ -50,7 +50,7 @@
                 $tokendate = new Carbon($user->tokendate);
 
                 if($tokendate->diffInHours($now) < 25){
-               
+                
                     return $this->view->render($response, 'login.twig', ['email'=>$email, 'token'=>$token]);
     
                }else{
@@ -122,12 +122,30 @@
         public function setupUserNow($email, $id, $name, $request, $response){
 
             $cookieValJWT = $this->JWTAUTH->authenticate($id, $name, $email);
-            setCookie('umid', $cookieValJWT, time()+86500 * 30, '/', FALSE, TRUE);
+            setcookie('umid', $cookieValJWT, time()+86500 * 30, 'http://localhost/dealsmanager/', False, False, True);
             
             //forwarding request
             $this->flash->addMessage('success','Great stuff you\'re In');
             return $response->withHeader('X-Access-Token', $cookieValJWT);
 
+        }
+
+        //control logout
+        public function logOut($request, $response){
+
+            //check existence of cookie nd cut it out
+            if(isset($_COOKIE['umid'])){
+
+                unset($_COOKIE['umid']);
+                setcookie('umid', '', time() - 3600, 'http://localhost/dealsmanager/');
+
+                $this->flash->addMessage('success', 'You have sucessfully Logged out');
+                return $response->withRedirect($this->router->pathFor('signin'));
+
+            }
+
+            $this->flash->addMessage('error', 'You have to be logged in to log out');
+            return $response->withRedirect($this->router->pathFor('signin')); 
         }
 
     }

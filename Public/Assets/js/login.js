@@ -29,7 +29,7 @@ $(document).ready(function(){
                         $("body").removeClass("bodything");
                         $("#loaderr").fadeOut(400);
 
-                        //return window.location.href = 'http://localhost/dealsmanager/home';
+                        return window.location.href = 'http://localhost/dealsmanager/home';
 
                     }else{
                         //loader

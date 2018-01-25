@@ -34,14 +34,32 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Deals Manager</a>
+          <a class="navbar-brand" href="#">......</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Set Deals</a></li>
-            <li><a href="#contact">Manage Deals</a></li>
+          {# accessing global helpers set in  dependencies file #}
+            {% if user.check == False %}
+            <li class="active"><a href="#">Sign In</a></li>
+            {% endif %}
+            {% if user.check %}
+            <li><a href="{{path_for('home')}}">Home</a></li>
+            <li><a href="{{path_for('home')}}">Manage Deals</a></li>
+            {% endif %}
           </ul>
+
+          {% if user.check %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ user.details.name }}
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="{{path_for('logout')}}">LogOut</a></li>
+              </ul>
+            </div></li>    
+          </ul>
+          {% endif %}
+
         </div><!--/.nav-collapse -->
       </div>
     </nav>

@@ -7,21 +7,32 @@
      use DealsManager\Controllers\HomeController;
      use DealsManager\Controllers\AuthController;
      use DealsManager\Controllers\AuthViewController;
+     use DealsManager\Middlewares\AuthMiddleware;
+     use DealsManager\Middlewares\GuestMiddleware;
      use DealsManager\Models\User;
      use Carbon\Carbon;
 
 
-     $app->get("/", HomeController::class.":index")->setName('signin');
+     
+    $app->group('', function(){
 
-     $app->get("/home", AuthViewController::class.":index")->setName('home');
+        $this->get("/home", AuthViewController::class.":index")->setName('home');
+        $this->get("/logout", AuthController::class.":logOut")->setName('logout');
 
-     $app->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
+    })->add(AuthMiddleware::class);
 
-     $app->get("/login/{email}/{token}", AuthController::class.":login");
+    $app->group('', function(){
+        
+     $this->get("/", HomeController::class.":index")->setName('signin');
+     $this->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
-     $app->post("/login", AuthController::class.":postLogin");
+     $this->get("/login/{email}/{token}", AuthController::class.":login");
 
-     $app->post("/signinuser", function($request, $response){
+     
+
+     $this->post("/login", AuthController::class.":postLogin");
+
+     $this->post("/signinuser", function($request, $response){
         //getting values
         $email = filter_var($request->getParsedBodyParam('email'), FILTER_SANITIZE_EMAIL); 
         $name = substr($email, 0, strpos($email, "@"));
@@ -59,6 +70,8 @@
 
         return "true";
      });
+
+    })->add(GuestMiddleware::class);
 
      
 

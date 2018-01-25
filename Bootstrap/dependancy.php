@@ -6,18 +6,6 @@
 
      $container = $app->getContainer();
 
-     //use slim views
-     $container['view'] = function ($container) {
-        $view = new \Slim\Views\Twig(__DIR__ . '/../Resources/Views', [
-            'cache' => $container->settings['views']['cache']
-        ]);
-        $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-        $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-        $view->getEnvironment()->addGlobal('flash', $container->flash);
-
-        return $view;
-    };
-
     //adding swift mailer to the container;
     $container['mail'] = function($container){
 
@@ -38,6 +26,26 @@
         return new DealsManager\Controllers\JWTController($container);
 
     };
+
+    $container['user'] = function($container){
+
+        return new DealsManager\Controllers\AuthViewHandler($container);
+
+    };
+    
+     //use slim views
+     $container['view'] = function ($container) {
+        $view = new \Slim\Views\Twig(__DIR__ . '/../Resources/Views', [
+            'cache' => $container->settings['views']['cache']
+        ]);
+        $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+        $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+        $view->getEnvironment()->addGlobal('flash', $container->flash);
+        $view->getEnvironment()->addGlobal('user', ['check'=>$container->user->check(), 'details'=>$container->user->getUser()]);
+
+        return $view;
+    };
+
     
     //add csrf to the container
     // $container['csrf'] = function($container){
