@@ -17,18 +17,18 @@
     $app->group('', function(){
 
         $this->get("/home", AuthViewController::class.":index")->setName('home');
+        $this->get("/managedeals", AuthViewController::class.":manageDeals")->setName('managedeals');
         $this->get("/logout", AuthController::class.":logOut")->setName('logout');
 
     })->add(AuthMiddleware::class);
 
     $app->group('', function(){
-        
+
      $this->get("/", HomeController::class.":index")->setName('signin');
      $this->post("/checkemailvalidity", AuthController::class.":checkEmailValidity");
 
      $this->get("/login/{email}/{token}", AuthController::class.":login");
 
-     
 
      $this->post("/login", AuthController::class.":postLogin");
 

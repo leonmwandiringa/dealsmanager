@@ -8,14 +8,18 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.6.2/sweetalert2.min.css">
+    
     <link rel="stylesheet" href="{{base_url()}}/Public/Assets/css/preloader.css">
     <title>Deals Manager - {% block pagetitle %}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{base_url()}}/Public/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{base_url()}}/Public/Assets/css/dataTables.bootstrap.min.css">
 
     <script src="{{base_url()}}/Public/Assets/js/jquery.min.js"></script>
     <script src="{{base_url()}}/Public/Assets/js/bootstrap.min.js"></script>
+    <script src="{{base_url()}}/Public/Assets/js/jquery.dataTables.min.js"></script>
+    <script src="{{base_url()}}/Public/Assets/js/dataTables.bootstrap.min.js"></script>
     <script src="{{base_url()}}/Public/Assets/js/signin.js"></script>
     <script src="{{base_url()}}/Public/Assets/js/login.js"></script>
     
@@ -51,7 +55,7 @@
           {% if user.check %}
           <ul class="nav navbar-nav navbar-right">
             <li><div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ user.details.name }}
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: rgba(51, 122, 183, 0);margin-top: 10px;">{{ user.details.name }}
               <span class="caret"></span></button>
               <ul class="dropdown-menu">
                 <li><a href="{{path_for('logout')}}">LogOut</a></li>

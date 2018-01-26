@@ -15,6 +15,11 @@
 
     }
 
+    public function manageDeals($request, $response){
+
+        return $this->view->render($response, 'adddeals.twig');
+    }
+
  }
 
 ?>
